@@ -25,6 +25,10 @@ public class StreamFileUploadController {
     @PostMapping(value = "/upload")
     public ResponseEntity<String> upload(HttpServletRequest request) {
         try {
+            // Get Content header size
+            long contentLength = request.getContentLengthLong();
+            log.info("Content-Length: {}", contentLength);
+
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
